@@ -14,6 +14,7 @@ namespace UI.App_Start
     using Demo.Abstract;
     using Demo.Entities;
     using System.Collections.Generic;
+    using Demo.Concrete;
 
     public static class NinjectWebCommon 
     {
@@ -65,14 +66,16 @@ namespace UI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            Mock<IProductRepository> mock = new Mock<IProductRepository>();
-            mock.Setup(m => m.Products).Returns(new List<Product>
-            {
-                new Product {Name ="Fotball", Price = 12 },
-                 new Product {Name ="Shoes", Price = 37 },
-                  new Product {Name ="Tools", Price = 22 }
-            });
-            kernel.Bind<IProductRepository>().ToConstant(mock.Object);
+            kernel.Bind<IProductRepository>().To<EFProductRepository>();
+
+            //Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            //mock.Setup(m => m.Products).Returns(new List<Product>
+            //{
+            //    new Product {Name ="Fotball", Price = 12 },
+            //     new Product {Name ="Shoes", Price = 37 },
+            //      new Product {Name ="Tools", Price = 22 }
+            //});
+            //kernel.Bind<IProductRepository>().ToConstant(mock.Object);
         }        
     }
 }

@@ -14,10 +14,15 @@ namespace UI.Controllers
         {
             repository = repo;
         }
+        public int PageSize = 4;
 
-        public ActionResult List()
+        public ActionResult List(int page = 1)
         {
-            return View(repository.Products);
+            return View(repository.Products
+                .OrderBy(p => p.Id)
+                .Skip((page - 1) * PageSize)
+                .Take(PageSize)
+                );
         }
     }
 }

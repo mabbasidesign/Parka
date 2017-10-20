@@ -4,7 +4,8 @@
     ViewBag.Title = "List";
 }
 
-<h2>List</h2>
+<h2>Product List</h2>
+<h2></h2>
 
 @foreach(var p in Model)
 {
@@ -12,6 +13,8 @@
         <h3>@p.Name</h3>
         <h4>@p.Price.ToString("c")</h4>
         @p.Description
+        <hr />
     </div>
 }
+
 
