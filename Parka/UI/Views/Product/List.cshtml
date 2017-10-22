@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Demo.Entities.Product>
+﻿@model UI.Models.ProductListViewModel
 
 @{
     ViewBag.Title = "List";
@@ -7,14 +7,23 @@
 <h2>Product List</h2>
 <h2></h2>
 
-@foreach(var p in Model)
+@foreach (var p in Model.Products)
 {
-    <div>
-        <h3>@p.Name</h3>
-        <h4>@p.Price.ToString("c")</h4>
-        @p.Description
+    <div class="well">
+        <h3>
+            <strong>@p.Name</strong>
+            <span class="pull-right label label-primary">@p.Price.ToString("c")</span>
+        </h3>
+        <span class="lead">@p.Description</span>
         <hr />
     </div>
 }
 
 
+<div class="btn btn-group pull-right">
+    @HtmlHelper(Model.PagingInfo, x => Url.Action("List", new
+{
+    Page =
+    x
+}))
+</div>
